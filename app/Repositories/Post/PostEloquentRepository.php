@@ -5,6 +5,8 @@ namespace App\Repositories\Post;
 
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Collection;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class PostEloquentRepository implements PostRepositoryInterface
 {
@@ -15,28 +17,28 @@ class PostEloquentRepository implements PostRepositoryInterface
         $this->model = $post;
     }
 
-    public function all()
+    public function all():Collection
     {
         return $this->model->all();
     }
 
-    public function find($field_id, $field_name = 'id')
+    public function find($field_id, $field_name = 'id'):Post
     {
         return $this->model->where($field_name, $field_id)->first();
     }
 
-    public function create(array $data)
+    public function create(array $data):Post
     {
-        // TODO: Implement create() method.
+        return $this->model->create($data);
     }
 
-    public function update(array $data, $id)
+    public function update(array $data, $field_id, $field_name = 'id'):int
     {
-        // TODO: Implement update() method.
+        return $this->model->where($field_name, $field_id)->update($data);
     }
 
-    public function delete($id)
+    public function delete($field_ids, $field_name = 'id'):void
     {
-        // TODO: Implement delete() method.
+        $this->model->whereIn($field_name, $field_ids)->delete();
     }
 }
