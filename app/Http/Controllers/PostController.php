@@ -22,14 +22,13 @@ class PostController extends Controller
 
     protected function index(PostIndexRequest $request): AnonymousResourceCollection
     {
-        //$body = $request->validated();
         $data = $this->service->all();
         return PostIndexResource::collection($data);
     }
 
-    protected function show()
+    protected function show($post_id)
     {
-
+        $post = $this->service->find($post_id);
     }
 
     protected function store()

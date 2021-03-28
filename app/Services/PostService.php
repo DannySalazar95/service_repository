@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use App\Repositories\Post\PostInterfaceRepository;
+use App\Repositories\Post\PostRepositoryInterface;
 
 class PostService
 {
@@ -12,9 +12,9 @@ class PostService
 
     /**
      * PostService constructor.
-     * @param PostInterfaceRepository $repository
+     * @param PostRepositoryInterface $repository
      */
-    public function __construct(PostInterfaceRepository $repository)
+    public function __construct(PostRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -22,5 +22,10 @@ class PostService
     public function all()
     {
         return $this->repository->all();
+    }
+
+    public function find($post_id)
+    {
+        return $this->repository->find($post_id);
     }
 }
